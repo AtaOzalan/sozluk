@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = int(os.environ.get("DEBUG", default=0))
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
+ALLOWED_HOSTS = ["164.92.198.148" "www.mobilasyon.com" "mobilasyon.com"]
 
 GRAPHENE = {"SCHEMA": "dictionary_graph.schema.schema"}
 
@@ -70,28 +70,27 @@ TEMPLATES = [
 WSGI_APPLICATION = "djdict.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE"),
-        "NAME": os.environ.get("SQL_DATABASE"),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD"),
-        "HOST": os.environ.get("SQL_HOST"),
-        "PORT": os.environ.get("SQL_PORT"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'blogDB',
+        'USER': 'blog_admin',
+        'PASSWORD': 'testing123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
-
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = os.environ.get("EMAIL_PORT")
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_USE_TLS = True
 
-EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 CELERY_EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 
-REDIS_URL = "redis://redis:6379/1"
+REDIS_URL = "redis://127.0.0.1:6379"
 CELERY_BROKER_URL = REDIS_URL
 CELERY_EMAIL_TASK_CONFIG = {"default_retry_delay": 40}
 CACHES = {

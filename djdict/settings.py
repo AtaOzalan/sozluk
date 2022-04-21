@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "Not a secret! Delete this arg in prod
 DEBUG = True
 
 # SECURITY WARNING: don't allow any other hosts except your real host in production!
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["164.92.198.148" "www.mobilasyon.com" "mobilasyon.com"]
 
 GRAPHENE = {"SCHEMA": "dictionary_graph.schema.schema"}
 
@@ -103,13 +103,13 @@ WSGI_APPLICATION = "djdict.wsgi.application"
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE"),
-        "NAME": os.environ.get("SQL_DATABASE"),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD"),
-        "HOST": os.environ.get("SQL_HOST"),
-        "PORT": os.environ.get("SQL_PORT"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'blogDB',
+        'USER': 'blog_admin',
+        'PASSWORD': 'testing123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -136,10 +136,9 @@ SESSION_COOKIE_AGE = 1209600
 # performance if you have the cache server (memcached etc.) set up and running.
 SESSION_ENGINE = "dictionary.backends.sessions.db"
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-REDIS_URL = "redis://redis:6379/1"
+REDIS_URL = "redis://127.0.0.1:6379"
 CELERY_BROKER_URL = REDIS_URL
 CELERY_EMAIL_TASK_CONFIG = {"default_retry_delay": 40}
 CACHES = {
@@ -151,6 +150,7 @@ CACHES = {
         },
     }
 }
+
 
 LANGUAGE_COOKIE_NAME = "langcode"
 LANGUAGE_COOKIE_AGE = 180 * 86400
